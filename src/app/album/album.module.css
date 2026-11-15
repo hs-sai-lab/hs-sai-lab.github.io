@@ -1,13 +1,15 @@
 /* Album list: cover tiles, like a phone's photo albums (square cover, title, date and count). */
 .albums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 24px; }
-.album { display: block; color: var(--ink); }
+.albums > li { display: flex; }
+/* Card fills its grid row, so the date line sits at the same height across a row even when titles wrap differently. */
+.album { display: flex; flex-direction: column; width: 100%; color: var(--ink); }
 .album:hover { text-decoration: none; }
 .cover { display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 8px; background: var(--surface); }
 .cover img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease; }
 .album:hover .cover img { opacity: 0.88; }
 .albumTitle { display: block; margin-top: 12px; font-weight: 600; line-height: 1.4; }
 .album:hover .albumTitle { color: var(--accent); }
-.albumMeta { display: block; margin-top: 4px; color: var(--muted); font-size: var(--text-sm); }
+.albumMeta { display: block; margin-top: auto; padding-top: 4px; color: var(--muted); font-size: var(--text-sm); }
 
 /* One event: square thumbnails in a tight grid; a photo opens in a dialog. */
 .grid { display: grid; grid-template-columns: repeat(var(--cols, 5), minmax(0, 1fr)); gap: 4px; }
@@ -29,5 +31,5 @@
 }
 @media (max-width: 640px) {
   .albums { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 12px; }
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
+  .grid { grid-template-columns: repeat(var(--cols-phone, 3), minmax(0, 1fr)); gap: 2px; }
 }

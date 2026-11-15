@@ -6,7 +6,7 @@ const LINK_STYLE = { textDecoration: 'underline', textUnderlineOffset: '0.18em' 
 
 /**
  * Draws stored plain text with its marks (lib/text-marks): **bold** becomes <strong>, {blue|…}/{red|…} a colored span,
- * web addresses links. Only React elements, never HTML from the text.
+ * web and e-mail addresses links. Only React elements, never HTML from the text.
  * Put it inside an element with `white-space: pre-line` to keep line breaks. The 관리 화면 can use it for its preview.
  */
 export function MarkedText({ text }: { text: string }) {
@@ -14,7 +14,7 @@ export function MarkedText({ text }: { text: string }) {
     <>
       {textRuns(text).map((run, i) => {
         let node: ReactNode = splitLinks(run.text).map((p, k) => p.href
-          ? <a key={k} href={p.href} target="_blank" rel="noopener noreferrer" style={LINK_STYLE}>{p.text}</a>
+          ? <a key={k} href={p.href} {...(p.href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' })} style={LINK_STYLE}>{p.text}</a>
           : <Fragment key={k}>{p.text}</Fragment>);
         if (run.bold) node = <strong>{node}</strong>;
         if (run.color) node = <span style={{ color: MARK_COLORS[run.color] }}>{node}</span>;

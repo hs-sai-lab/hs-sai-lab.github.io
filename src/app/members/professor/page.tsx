@@ -9,6 +9,7 @@ import { visibleNav } from '@/lib/nav';
 import { MEMBERS_TABS } from '@/lib/site';
 import styles from './professor.module.css';
 import { KoParts } from '@/components/KoParts';
+import { ShowMore } from '@/components/ShowMore';
 
 export const metadata: Metadata = { title: 'Professor', description: 'Prof. Seon Man Kim, advisor of SAI Lab, Hanshin University.' };
 
@@ -63,6 +64,7 @@ export default function ProfessorPage() {
       )}
 
       <Section id="publications" title="Publications">
+        <ShowMore count={p.publications.length} label="Show all publications">
         <ul className={styles.pubs}>
           {p.publications.map((pub) => (
             <li key={pub.title}>
@@ -74,6 +76,7 @@ export default function ProfessorPage() {
             </li>
           ))}
         </ul>
+        </ShowMore>
       </Section>
 
       <Section id="intellectual-property" title="Intellectual Property">
