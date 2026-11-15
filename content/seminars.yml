@@ -35,3 +35,9 @@
   summary: "DCASE 2026 Task 4 베이스라인의 4채널 음원 분리·태깅 구조 재현과 학습 실험"
   file: "2026-11-14-e3bf3b8e.pdf"
   cover: "2026-11-14-24883468.jpg"
+- date: 2026-01-22
+  presenter: hyun-jae-shin
+  title: "마이크로폰 탑재 로봇 기술 동향 분석 목적"
+  summary: "시각 센서 중심 로봇 인식의 한계와 로봇 유형별 마이크로폰 활용 사례 정리"
+  file: "2026-11-15-d5d74049.pdf"
+  cover: "2026-11-15-c731c5a5.jpg"
