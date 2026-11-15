@@ -8,6 +8,7 @@ pub_date: "2026-06-13"
 status: ""
 award: ""
 links: []
+pdf: "2026-11-15-ebf54472.pdf"
 permalink: "/publications/2026-a-review-of-acoustic-based-environmental-perception-technologies-for-quadruped-robot-applications/"
 excerpt: ""
 ---
