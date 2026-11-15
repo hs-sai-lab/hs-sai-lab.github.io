@@ -19,12 +19,14 @@ export function NewsList({ news }: { news: NewsEntry[] }) {
   return (
     <DateList wide items={news.map((n) => ({
       date: formatDate(n.date),
-      content: <>
+      content: <span className={styles.entry}>
         {n.kind && <strong className={styles.kind} lang="ko">{n.kind}</strong>}
-        <span lang={langOf(n.text)}>{n.text}</span>
-        {n.href && <> <Go href={n.href} label={`${n.hrefLabel}: ${n.text}`}>{`${n.hrefLabel} →`}</Go></>}
-        {n.album && <> <Go href={n.album.href} label={`사진: ${n.text}`}>사진 →</Go></>}
-      </>,
+        <span>
+          <span lang={langOf(n.text)}>{n.text}</span>
+          {n.href && <> <Go href={n.href} label={`${n.hrefLabel}: ${n.text}`}>{`${n.hrefLabel} →`}</Go></>}
+          {n.album && <> <Go href={n.album.href} label={`사진: ${n.text}`}>사진 →</Go></>}
+        </span>
+      </span>,
     }))} />
   );
 }

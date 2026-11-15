@@ -110,8 +110,13 @@ function lineRuns(line: string): TextRun[] {
   return runs;
 }
 
-/** Web addresses inside a run, split out so they can be drawn as links. */
-const URL = /(https?:\/\/[^\s<>"')*{}]+)/g;
+/** Web addresses and e-mail addresses inside a run, split out so they can be drawn as links (mailto: for e-mail). */
+const LINKS = /(https?:\/\/[^\s<>"')*{}]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})/;
 export function splitLinks(text: string): { text: string; href?: string }[] {
-  return text.split(URL).filter(Boolean).map((p) => (/^https?:\/\//.test(p) ? { text: p, href: p } : { text: p }));
+  // split() with one capture group puts the matches at odd positions.
+  return text.split(LINKS).flatMap((p, i) => {
+    if (!p) return [];
+    if (i % 2 === 0) return [{ text: p }];
+    return [{ text: p, href: /^https?:\/\//.test(p) ? p : `mailto:${p}` }];
+  });
 }

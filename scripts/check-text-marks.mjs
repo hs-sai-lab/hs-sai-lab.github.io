@@ -3,7 +3,7 @@
  * 관리 화면 writes with serializeRuns reads back the same (npm run check:marks).
  */
 import { fileURLToPath } from 'node:url';
-const { textRuns, serializeRuns, escapeMarks } = await import(fileURLToPath(new URL('../src/lib/text-marks.ts', import.meta.url)));
+const { textRuns, serializeRuns, escapeMarks, splitLinks } = await import(fileURLToPath(new URL('../src/lib/text-marks.ts', import.meta.url)));
 const f = (r) => r.text + (r.bold ? '·B' : '') + (r.color ? '·' + r.color : '');
 const cases = [
   ['a **b** c', ['a ','b·B',' c']], ['**b**', ['b·B']], ['a ** b', ['a ** b']], ['****', ['****']], ['** **', ['** **']],
@@ -53,5 +53,15 @@ for (const runs of cases2) {
   if (a !== b) { rtBad++; if (rtBad <= 5) console.log('RT FAIL', JSON.stringify(runs), '→', JSON.stringify(stored), '→', JSON.stringify(back)); }
 }
 if (escapeMarks('a*b{c}\\d') !== 'a\\*b\\{c\\}\\\\d') { bad++; console.log('FAIL escapeMarks', escapeMarks('a*b{c}\\d')); }
+const links = [
+  ['문의 (이메일 smkim@hs.ac.kr 및 방문)', [['문의 (이메일 '], ['smkim@hs.ac.kr', 'mailto:smkim@hs.ac.kr'], [' 및 방문)']]],
+  ['see https://a.com/x) and a.b@c.co.kr.', [['see '], ['https://a.com/x', 'https://a.com/x'], [') and '], ['a.b@c.co.kr', 'mailto:a.b@c.co.kr'], ['.']]],
+  ['https://x.com/@user', [['https://x.com/@user', 'https://x.com/@user']]],
+  ['2026.11.12 no link', [['2026.11.12 no link']]],
+];
+for (const [input, want] of links) {
+  const got = splitLinks(input).map((p) => (p.href ? [p.text, p.href] : [p.text]));
+  if (JSON.stringify(got) !== JSON.stringify(want)) { bad++; console.log('FAIL links', JSON.stringify(input), JSON.stringify(got)); }
+}
 if (bad || rtBad) { console.error(`Text marks: ${bad} reading cases and ${rtBad} round trips failed.`); process.exit(1); }
-console.log(`Text marks: ${cases.length} reading cases and ${cases2.length} round trips passed.`);
+console.log(`Text marks: ${cases.length} reading cases, ${links.length} link cases and ${cases2.length} round trips passed.`);

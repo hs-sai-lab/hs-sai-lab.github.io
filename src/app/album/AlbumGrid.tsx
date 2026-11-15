@@ -3,8 +3,12 @@
 import { type CSSProperties, type KeyboardEvent, useRef, useState } from 'react';
 import { langOf } from '@/lib/format';
 import styles from './album.module.css';
+import { useSwipe } from '@/lib/useSwipe';
 
 type Photo = { src: string; alt: string };
+
+/** Phones: one photo full width, two or four in two columns, otherwise three, so a short album has no empty column. */
+const phoneCols = (n: number) => (n === 1 ? 1 : n === 2 || n === 4 ? 2 : 3);
 
 /** Thumbnail grid for one album; a photo opens in a dialog with previous/next. */
 export function AlbumGrid({ title, photos }: { title: string; photos: Photo[] }) {
@@ -16,12 +20,13 @@ export function AlbumGrid({ title, photos }: { title: string; photos: Photo[] })
     if (e.key === 'ArrowRight') step(1);
     if (e.key === 'ArrowLeft') step(-1);
   };
+  const swipe = useSwipe(() => step(-1), () => step(1));
   const current = photos[index];
 
   return (
     <>
       {/* 3–5 columns by photo count, so a short event still fills the row. */}
-      <ul className={styles.grid} style={{ '--cols': Math.min(5, Math.max(3, photos.length)) } as CSSProperties}>
+      <ul className={styles.grid} style={{ '--cols': Math.min(5, Math.max(3, photos.length)), '--cols-phone': phoneCols(photos.length) } as CSSProperties}>
         {photos.map((p, i) => (
           <li key={p.src}>
             <button type="button" className={styles.thumb} onClick={() => open(i)} aria-label={`${title}: photo ${i + 1} of ${photos.length}${p.alt ? `, ${p.alt}` : ''}`}>
@@ -30,7 +35,7 @@ export function AlbumGrid({ title, photos }: { title: string; photos: Photo[] })
           </li>
         ))}
       </ul>
-      <dialog ref={dialog} className={styles.dialog} onKeyDown={onKeyDown} onClick={(e) => { if (e.target === dialog.current) dialog.current?.close(); }} aria-label={title}>
+      <dialog ref={dialog} className={styles.dialog} onKeyDown={onKeyDown} {...swipe} onClick={(e) => { if (e.target === dialog.current) dialog.current?.close(); }} aria-label={title}>
         {current && (
           <figure className={styles.figure}>
             <img src={current.src} alt={current.alt} lang={langOf(current.alt)} />

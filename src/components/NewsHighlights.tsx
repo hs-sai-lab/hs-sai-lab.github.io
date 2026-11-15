@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styles from './NewsHighlights.module.css';
+import { useSwipe } from '@/lib/useSwipe';
 
 export type Highlight = {
   headline: string;
@@ -37,6 +38,8 @@ export function NewsHighlights({ items }: { items: Highlight[] }) {
     setCycle((c) => c + 1);
   }, [items.length]);
 
+  const swipe = useSwipe(() => go(currentRef.current - 1, true), () => go(currentRef.current + 1));
+
   useEffect(() => { setStill(window.matchMedia('(prefers-reduced-motion: reduce)').matches); }, []);
   useEffect(() => {
     if (still || paused || items.length < 2) return;
@@ -55,6 +58,7 @@ export function NewsHighlights({ items }: { items: Highlight[] }) {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false); }}
+      {...(items.length > 1 ? swipe : {})}
     >
       <div className={styles.text}>
         <div className={styles.slot}>

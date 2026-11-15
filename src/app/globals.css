@@ -43,6 +43,11 @@
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--site-header-h) + 16px); }
 
 body {
+  /* Short pages: main grows so the footer sits at the bottom of the screen instead of floating up. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -55,6 +60,8 @@ body {
   overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
 }
+
+body > main { flex: 1 0 auto; }
 
 h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }

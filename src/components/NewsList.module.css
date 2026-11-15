@@ -1,5 +1,9 @@
 /* Kind as plain bold text in a fixed slot so titles line up (guideline: 분류 표시는 본문색 굵은 글자). */
 .kind { display: inline-block; min-width: 2.5em; margin-right: 12px; color: var(--ink); font-size: var(--text-sm); font-weight: 700; }
+/* Kind and title side by side, so a title that wraps stays under its own first line (hanging indent), not under the kind. */
+.entry { display: flex; align-items: baseline; }
+.entry > .kind { flex: none; }
+.entry > span { min-width: 0; }
 .go { white-space: nowrap; }
 .go + .go { margin-left: 4px; }
 

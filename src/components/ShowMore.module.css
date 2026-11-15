@@ -1,0 +1,8 @@
+/* Wider screens show the whole list and no button. */
+.more { display: none; }
+
+@media (max-width: 640px) {
+  .wrap[data-collapsed] > :is(ul, ol) > li:nth-child(n + 6) { display: none; }
+  .more { display: inline-block; margin-top: 16px; padding: 10px 0; border: 0; background: none; color: var(--accent); font: inherit; font-size: var(--text-sm); font-weight: 600; cursor: pointer; }
+  .more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+}
