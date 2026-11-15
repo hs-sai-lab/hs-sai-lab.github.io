@@ -8,6 +8,7 @@ import { formatDate } from '@/lib/format';
 import { visibleNav } from '@/lib/nav';
 import { MEMBERS_TABS } from '@/lib/site';
 import styles from './professor.module.css';
+import { KoParts } from '@/components/KoParts';
 
 export const metadata: Metadata = { title: 'Professor', description: 'Prof. Seon Man Kim, advisor of SAI Lab, Hanshin University.' };
 
@@ -25,9 +26,9 @@ export default function ProfessorPage() {
         <PhotoSlot photo={p.photo} alt={p.name} className={styles.photo} eager />
         <div>
           <h2 className={styles.name}>{p.name} <span lang="ko" className={styles.nameKo}>{p.name_ko}</span></h2>
-          <p className={styles.position}>{p.position}</p>
-          <p>{p.affiliation}</p>
-          {p.field && <p className="muted">{p.field}</p>}
+          <p className={styles.position}><KoParts text={p.position} /></p>
+          <p><KoParts text={p.affiliation} /></p>
+          {p.field && <p className="muted"><KoParts text={p.field} /></p>}
           <dl className={styles.contact}>
             {p.office && <><dt>Office</dt><dd>{p.office}</dd></>}
             {p.email && <><dt>Email</dt><dd><a href={`mailto:${p.email}`}>{p.email}</a></dd></>}

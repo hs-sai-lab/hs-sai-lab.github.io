@@ -1,6 +1,7 @@
 'use client';
 
 import { type CSSProperties, type KeyboardEvent, useRef, useState } from 'react';
+import { langOf } from '@/lib/format';
 import styles from './album.module.css';
 
 type Photo = { src: string; alt: string };
@@ -24,7 +25,7 @@ export function AlbumGrid({ title, photos }: { title: string; photos: Photo[] })
         {photos.map((p, i) => (
           <li key={p.src}>
             <button type="button" className={styles.thumb} onClick={() => open(i)} aria-label={`${title}: photo ${i + 1} of ${photos.length}${p.alt ? `, ${p.alt}` : ''}`}>
-              <img src={p.src} alt="" loading="lazy" />
+              <img src={p.src} alt={p.alt} lang={langOf(p.alt)} loading="lazy" />
             </button>
           </li>
         ))}
@@ -32,9 +33,9 @@ export function AlbumGrid({ title, photos }: { title: string; photos: Photo[] })
       <dialog ref={dialog} className={styles.dialog} onKeyDown={onKeyDown} onClick={(e) => { if (e.target === dialog.current) dialog.current?.close(); }} aria-label={title}>
         {current && (
           <figure className={styles.figure}>
-            <img src={current.src} alt={current.alt} />
+            <img src={current.src} alt={current.alt} lang={langOf(current.alt)} />
             <figcaption className={styles.caption}>
-              <span>{current.alt || title}</span>
+              <span lang={langOf(current.alt || title)}>{current.alt || title}</span>
               <span className="num">{index + 1} / {photos.length}</span>
             </figcaption>
           </figure>

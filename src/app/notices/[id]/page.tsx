@@ -6,7 +6,7 @@ import { MarkedText } from '@/components/MarkedText';
 import { PageHeader } from '@/components/PageHeader';
 import { Redirect, redirectMetadata } from '@/components/Redirect';
 import { getNotices, type Notice } from '@/lib/content';
-import { formatDate } from '@/lib/format';
+import { formatDate, langOf } from '@/lib/format';
 import { NOTICE_KINDS, noticeTitle } from '@/lib/notices';
 import styles from '../notices.module.css';
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 /** Remarks keep their line breaks; **bold** and web addresses are drawn by MarkedText (guideline "내용 표기"). */
 function Remarks({ text }: { text: string }) {
-  return <p className={styles.remarks}><MarkedText text={text} /></p>;
+  return <p className={styles.remarks} lang={langOf(text)}><MarkedText text={text} /></p>;
 }
 
 function facts(n: Notice): [string, ReactNode][] {
