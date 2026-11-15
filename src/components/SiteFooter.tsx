@@ -3,6 +3,7 @@ import { getLab } from '@/lib/content';
 import { visibleNav } from '@/lib/nav';
 import { FOOTER_LINKS } from '@/lib/site';
 import styles from './SiteFooter.module.css';
+import { langOf } from '@/lib/format';
 
 export function SiteFooter() {
   const lab = getLab();
@@ -22,7 +23,7 @@ export function SiteFooter() {
         <nav aria-label="Quick links">
           <ul className={styles.links}>
             {links.map((l) => (
-              <li key={l.href}><Link href={l.href}>{l.title}</Link></li>
+              <li key={l.href}><Link href={l.href} lang={langOf(l.title)}>{l.title}</Link></li>
             ))}
           </ul>
         </nav>

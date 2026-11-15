@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import type { Notice } from '@/lib/content';
-import { formatDate } from '@/lib/format';
+import { formatDate, langOf } from '@/lib/format';
 import { localDay, NOTICE_KINDS, noticeTitle, orderNotices } from '@/lib/notices';
 import styles from './notices.module.css';
 
@@ -25,7 +25,7 @@ export function NoticesList({ notices, builtOn }: { notices: Notice[]; builtOn: 
           <li key={n.id} className={styles.row}>
             <div className={styles.main}>
               {n.pinnedNow && <strong className={styles.pin}>Pinned</strong>}
-              <h2 className={styles.title}><Link href={`/notices/${n.id}/`}>{noticeTitle(n)}</Link></h2>
+              <h2 className={styles.title} lang={langOf(noticeTitle(n))}><Link href={`/notices/${n.id}/`}>{noticeTitle(n)}</Link></h2>
               {meta.some(Boolean) && (
                 <p className={styles.meta}>{meta.filter(Boolean).map((m, i) => <span key={i} className={m === n.host ? undefined : 'num'}>{m}</span>)}</p>
               )}
