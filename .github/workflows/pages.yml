@@ -12,11 +12,11 @@ concurrency:
 jobs:
   build_pr:
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -42,15 +42,15 @@ jobs:
         run: npm run check:marks
   build:
     if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment:
       name: github-pages
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -67,7 +67,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
       - name: Check out public renditions for Pages
         if: steps.media.outputs.mode == 'pages_artifact'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: hs-sai-lab/SAI_Pages_Media
           token: ${{ secrets.MEDIA_PAGES_READ_TOKEN }}
@@ -90,7 +90,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       pages: write
