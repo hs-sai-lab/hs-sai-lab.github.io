@@ -8,6 +8,7 @@ pub_date: "2026-06-19"
 status: ""
 award: "Paper Encouragement Award"
 links: []
+pdf: "2026-11-15-6409f173.pdf"
 permalink: "/publications/qa-error-correction-dataset/"
 excerpt: "Synthetic training data for error review and correction in academic-regulation question answering."
 ---
