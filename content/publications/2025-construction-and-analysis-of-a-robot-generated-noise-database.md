@@ -8,6 +8,7 @@ pub_date: "2025-10-25"
 status: ""
 award: ""
 links: []
+pdf: "2026-11-15-0fa4ec3c.pdf"
 permalink: "/publications/2025-construction-and-analysis-of-a-robot-generated-noise-database/"
 excerpt: ""
 ---
