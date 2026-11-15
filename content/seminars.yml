@@ -47,3 +47,9 @@
   summary: "로봇 자가소음 실측 녹음으로 Train/Test 음성 데이터셋을 분할·합성하는 구축 절차"
   file: "2026-11-15-9ef24437.pdf"
   cover: "2026-11-15-7f0e636a.jpg"
+- date: 2026-03-03
+  presenter: hyun-jae-shin
+  title: "실환경 로봇 청각지능 구현을 위한 오디오 딥러닝 기술 동향 분석"
+  summary: "로봇 청각지능의 핵심 기능과 실환경 강인성 문제를 중심으로 본 오디오 딥러닝 동향"
+  file: "2026-11-15-190f324a.pdf"
+  cover: "2026-11-15-c4bf7dea.jpg"
