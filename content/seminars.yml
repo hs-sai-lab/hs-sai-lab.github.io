@@ -41,3 +41,9 @@
   summary: "시각 센서 중심 로봇 인식의 한계와 로봇 유형별 마이크로폰 활용 사례 정리"
   file: "2026-11-15-d5d74049.pdf"
   cover: "2026-11-15-c731c5a5.jpg"
+- date: 2026-01-22
+  presenter: hyun-jae-shin
+  title: "실환경 로봇 자가소음 데이터를 활용한 Train/Test 음성 데이터셋 구축 방법"
+  summary: "로봇 자가소음 실측 녹음으로 Train/Test 음성 데이터셋을 분할·합성하는 구축 절차"
+  file: "2026-11-15-9ef24437.pdf"
+  cover: "2026-11-15-7f0e636a.jpg"
