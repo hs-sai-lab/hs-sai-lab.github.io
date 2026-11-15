@@ -27,6 +27,7 @@ export { PublishFailure } from '@admin/components/PublishFailure';
 export { MemberForm } from '@admin/app/members/MemberForm';
 export { markSchema, plainPaste, toDoc, toValue } from '@admin/lib/markDoc';
 export { textRuns } from '@/lib/text-marks';
+export { freshLink } from '@admin/lib/freshLink';
 `;
 
 const dir = mkdtempSync(join(tmpdir(), 'sai-check-admin-'));
@@ -136,7 +137,14 @@ try {
   assert.equal(ui.toValue(ms.nodes.doc.create(null, ui.plainPaste(styled, false).content)), '굵은 빨강\n둘째 줄');
   assert.equal(ui.plainPaste(styled, true), styled);
 
-  console.log('Management screen routes, file fields, failure reasons, drafts and the notice editor passed.');
+  // "공개 사이트" 링크는 누른 시각을 ?v=로 붙여 캐시를 건너뜁니다. 경로와 #는 그대로, 이미 있던 v는 바꿉니다.
+  assert.equal(ui.freshLink('https://hs-sai-lab.github.io/research/', 36 ** 3), 'https://hs-sai-lab.github.io/research/?v=1000');
+  assert.equal(ui.freshLink('https://hs-sai-lab.github.io/notices/?v=old#top', 35), 'https://hs-sai-lab.github.io/notices/?v=z#top');
+  assert.notEqual(ui.freshLink('https://hs-sai-lab.github.io/'), ui.freshLink('https://hs-sai-lab.github.io/', Date.now() + 1000));
+  const header = readFileSync(join(root, 'admin/src/components/AdminHeader.tsx'), 'utf8');
+  assert.match(header, /onClick=\{fresh\} onAuxClick=\{fresh\} onContextMenu=\{fresh\}/, 'every way of opening the link gets a fresh address');
+
+  console.log('Management screen routes, file fields, failure reasons, drafts, the notice editor and the site link passed.');
 } finally {
   rmSync(dir, { recursive: true, force: true });
 }
