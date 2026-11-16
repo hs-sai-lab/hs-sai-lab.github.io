@@ -5,7 +5,7 @@ import { PublicationItem } from '@/components/PublicationItem';
 import { Section } from '@/components/Section';
 import { NewsList } from '@/components/NewsList';
 import { RecruitmentBanner } from '@/components/RecruitmentBanner';
-import { getHomeSlides, getLab, getNotices, getPeople, getPoem, getPublications, getResearchAreas } from '@/lib/content';
+import { getAlbums, getHomeSlides, getLab, getNotices, getPeople, getPoem, getPublications, getResearchAreas } from '@/lib/content';
 import { getNewsEntries } from '@/lib/news';
 import { SHOW_RESEARCH_AREAS } from '@/lib/site';
 import styles from './home.module.css';
@@ -28,6 +28,7 @@ export default function HomePage() {
         quote={poem.hero}
         poemTitle={poem.stanzas.length > 0 ? poem.title : ''}
         slides={getHomeSlides()}
+        albumPhotos={getAlbums().flatMap((a) => (a.cover ? [a.cover.src, ...a.photos.map((p) => p.src).filter((src) => src !== a.cover.src)] : a.photos.map((p) => p.src)))}
       />
 
       {news.length > 0 && (
