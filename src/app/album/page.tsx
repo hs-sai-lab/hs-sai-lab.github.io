@@ -22,9 +22,7 @@ export default function AlbumPage() {
                 <Link href={`/album/${a.slug}/`} className={styles.album}>
                   <span className={styles.cover}><img src={a.cover.src} alt="" loading="lazy" /></span>
                   <span className={styles.albumTitle} lang={langOf(a.title)}>{a.title}</span>
-                  <span className={styles.albumMeta} lang="ko">
-                    <span className="num">{formatDate(a.date)}</span> · 사진 <span className="num">{a.photos.length}</span>장
-                  </span>
+                  <span className={styles.albumMeta}><span className="num">{formatDate(a.date)}</span></span>
                 </Link>
               </li>
             ))}
