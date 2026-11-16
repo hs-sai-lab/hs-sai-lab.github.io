@@ -13,6 +13,8 @@
 .slides, .shade, .sky { position: absolute; inset: 0; }
 .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; opacity: 0; transition: opacity 1.4s ease; }
 .slide[data-active='true'] { opacity: 1; }
+/* Portrait album photos: keep the upper part (faces) instead of the middle. */
+.slide[data-tall] { object-position: 62% 28%; }
 .shade { background: linear-gradient(90deg, rgba(13, 24, 48, 0.96) 0%, rgba(13, 24, 48, 0.83) 28%, rgba(13, 24, 48, 0.22) 78%, rgba(13, 24, 48, 0.14) 100%); }
 .sky { background: #0d1830; opacity: 0; transition: opacity 1.8s ease; }
 :global(html[data-hero='night']) .sky { opacity: 1; }
@@ -84,6 +86,9 @@
 
 @media (max-width: 640px) {
   .slide { object-position: 68% center; }
+  .slide[data-tall] { object-position: 68% 28%; }
+  /* The quote runs to about 80% of a phone's width, so the shade stays dark that far (white text >= 4.5:1 even on a white photo). */
+  .shade { background: linear-gradient(90deg, rgba(13, 24, 48, 0.98) 0%, rgba(13, 24, 48, 0.9) 50%, rgba(13, 24, 48, 0.75) 82%, rgba(13, 24, 48, 0.5) 100%); }
   .text { max-width: 270px; }
   .title { font-size: 2.75rem; }
 }
