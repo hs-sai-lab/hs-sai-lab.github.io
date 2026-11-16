@@ -27,7 +27,7 @@ export default async function AlbumEventPage({ params }: Params) {
     <>
       <PageHeader
         title={album.title}
-        lede={<span lang="ko"><span className="num">{formatDate(album.date)}</span> · 사진 <span className="num">{album.photos.length}</span>장</span>}
+        lede={<span className="num">{formatDate(album.date)}</span>}
         back={<Link href="/album/">Back to Album</Link>}
         long
       />
