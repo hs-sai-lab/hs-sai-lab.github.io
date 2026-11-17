@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, type SyntheticEvent } from 'react';
+import { HOME_ALBUM_PICKS } from '@/lib/site';
 import { METEORS, NIGHT_MS, SLIDE_MS } from './heroSky';
 import styles from './Hero.module.css';
 
@@ -10,14 +11,11 @@ function Formula({ text }: { text: string }) {
   return <>{parts.map((part, i) => (i % 2 === 1 ? <sup key={i}>{part}</sup> : part))}</>;
 }
 
-/** Album photos added to the chosen slides on each visit. */
-const ALBUM_PICKS = 6;
-
 type Props = {
   name: string; institution: string; quote: string[]; poemTitle: string;
   /** Photos picked in the 관리 화면 (Home → 슬라이드, content/home.yml): always shown first, in their order. */
   slides: string[];
-  /** Every album photo; a few are drawn at random on each visit, after the picked slides. */
+  /** Album photos that may appear on Home (not marked `home: false`); a few are drawn at random on each visit, after the picked slides. */
   albumPhotos: string[];
 };
 
@@ -53,7 +51,7 @@ export function Hero({ name, institution, quote, poemTitle, slides: picked, albu
   // Draw the album photos for this visit. With no picked slides the fixed first photo stays until the drawn one has
   // loaded, then fades over to it (the usual slide fade); on wide screens this happens behind the night sky.
   useEffect(() => {
-    const drawn = shuffled(albumPhotos.filter((src) => !picked.includes(src))).slice(0, ALBUM_PICKS);
+    const drawn = shuffled(albumPhotos.filter((src) => !picked.includes(src))).slice(0, HOME_ALBUM_PICKS);
     if (picked.length) { setSlides([...picked, ...drawn]); return; }
     if (!drawn.length) return;
     const first = slides[0];

@@ -344,13 +344,15 @@ export function getPoem(): Poem {
  * One event in the album. `slug` is its folder name and its page address (/album/<slug>/).
  * `cover` is the photo shown on the album list (the `cover` file in album.yml, or the first photo).
  */
-export type Album = { slug: string; date: string; title: string; cover: { src: string; alt: string }; photos: { src: string; alt: string }[] };
+/** `home` is false for a photo marked `home: false` in album.yml (관리 화면 Album "첫 화면에서 빼기"): it stays in the album but never appears on Home. */
+export type AlbumPhoto = { src: string; alt: string; home: boolean };
+export type Album = { slug: string; date: string; title: string; cover: AlbumPhoto; photos: AlbumPhoto[] };
 export function getAlbums(): Album[] {
   return readYaml<Record<string, unknown>[]>('album.yml', [])
     .map((a) => {
       const folder = str(a.folder).replace(/^\/+|\/+$/g, '');
       const photos = ((a.photos as Record<string, unknown>[] | null) ?? [])
-        .map((p) => ({ src: mediaUrl(`/images/album/${folder ? `${folder}/` : ''}${str(p.file)}`), alt: str(p.alt) }))
+        .map((p) => ({ src: mediaUrl(`/images/album/${folder ? `${folder}/` : ''}${str(p.file)}`), alt: str(p.alt), home: p.home !== false }))
         .filter((p) => !p.src.endsWith('/'));
       const coverFile = str(a.cover);
       const cover = photos.find((p) => coverFile && p.src.endsWith(`/${coverFile}`)) ?? photos[0];

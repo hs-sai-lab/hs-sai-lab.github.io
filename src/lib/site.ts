@@ -54,4 +54,7 @@ export const TEAM_GROUPS = [
   { id: 'undergrad', title: 'Undergraduate Researchers' },
 ] as const;
 
+/** Album photos drawn at random for the Home first screen on each visit, after the picked slides (Hero, 관리 화면 Home 안내). */
+export const HOME_ALBUM_PICKS = 6;
+
 export const SITE_URL = 'https://hs-sai-lab.github.io';

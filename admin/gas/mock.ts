@@ -51,8 +51,8 @@ const lists: Record<string, Item[]> = {
 };
 const photos: Record<string, Item[]> = {
   a1: [
-    { ...common('ph1', 0), file_id: 'file_ph1', preview_url: swatch('#2f5d8a', 'photo 1'), alt: '' },
-    { ...common('ph2', 1), file_id: 'file_ph2', preview_url: swatch('#5a3f7a', 'photo 2'), alt: '' },
+    { ...common('ph1', 0), file_id: 'file_ph1', preview_url: swatch('#2f5d8a', 'photo 1'), alt: '', home: true },
+    { ...common('ph2', 1), file_id: 'file_ph2', preview_url: swatch('#5a3f7a', 'photo 2'), alt: '', home: false },
   ],
 };
 const singles: Record<string, Record<string, unknown> & { version: number }> = {
@@ -140,7 +140,7 @@ function apply(method: string, path: string, input: Record<string, unknown> | nu
     const list = (photos[photoPath[1]] ??= []);
     for (const { file_id } of (body?.photos as { file_id: string }[]) ?? []) {
       const info = files[file_id] as { preview_url?: string } | undefined;
-      list.push({ ...common(`ph${Date.now()}${list.length}`, list.length), file_id, preview_url: info?.preview_url ?? null, alt: '' });
+      list.push({ ...common(`ph${Date.now()}${list.length}`, list.length), file_id, preview_url: info?.preview_url ?? null, alt: '', home: true });
     }
     const album = lists['/albums'].find((a) => a.id === photoPath[1]);
     if (album) album.photo_count = list.length;

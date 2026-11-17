@@ -50,7 +50,8 @@ export type Album = Common & {
   publication: ContentPublication;
   photos?: AlbumPhoto[];
 };
-export type AlbumPhoto = Common & { file_id: string; preview_url: string | null; alt: string };
+/** `home: false`: 공개 첫 화면의 무작위 앨범 사진에서 뺀 사진 (앨범에는 그대로 보임). */
+export type AlbumPhoto = Common & { file_id: string; preview_url: string | null; alt: string; home: boolean };
 
 /** 첫 화면 사진 (api.md 7장). note는 관리 화면에서만 보입니다. */
 export type HomeSlide = Common & { file_id: string; preview_url: string | null; note: string; publication: ContentPublication };
