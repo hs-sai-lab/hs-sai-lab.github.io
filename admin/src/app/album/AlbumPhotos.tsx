@@ -10,7 +10,8 @@ import type { Album, AlbumPhoto, System } from '@admin/lib/types';
 import styles from './album.module.css';
 
 /**
- * 펼친 행사의 사진 (api.md 6장, 규칙 문서 3-1): 사진 올리기, 대표로, 설명, 숨기기, 순서.
+ * 펼친 행사의 사진 (api.md 6장, 규칙 문서 3-1): 사진 올리기, 대표로, 설명, 첫 화면에서 빼기, 숨기기, 순서.
+ * 공개 첫 화면은 고른 사진 다음에 앨범 사진 몇 장을 무작위로 보여 줍니다. "첫 화면에서 빼기"(home: false)는 그 후보에서만 빼고 앨범에는 그대로 둡니다.
  * 대표 사진을 고르지 않았으면(cover_photo_id null) 숨기지 않은 첫 사진이 대표입니다.
  * 숨긴 사진은 대표로 고를 수 없고, 대표 사진을 숨기면 관리 서버가 대표를 첫 사진으로 되돌립니다.
  */
@@ -52,7 +53,7 @@ export function AlbumPhotos({ albumId, system, onAlbum, track }: {
     setBusy(true);
     try { await work(); return true; } catch (err) {
       if (signedOut(err)) return false;
-      await dialog.error('저장하지 못했습니다', errorBody(err, { alt: '설명', cover_photo_id: '대표 사진' }));
+      await dialog.error('저장하지 못했습니다', errorBody(err, { alt: '설명', cover_photo_id: '대표 사진', home: '첫 화면' }));
       if (err instanceof ApiError && err.code === 'CONFLICT') void load();
       return false;
     } finally { setBusy(false); }
@@ -124,10 +125,13 @@ export function AlbumPhotos({ albumId, system, onAlbum, track }: {
             return (
               <>
                 <p className={cell.caption}>{p.alt}</p>
-                <p className={cell.meta}>{[p.id === cover && '대표', p.hidden ? '숨김' : '공개 중'].filter(Boolean).join(' · ')}</p>
+                <p className={cell.meta}>{[p.id === cover && '대표', p.hidden ? '숨김' : '공개 중', !p.hidden && p.home === false && '첫 화면 제외'].filter(Boolean).join(' · ')}</p>
                 <span className={cell.actions}>
                   {!editing && p.id !== cover && !p.hidden && <button type="button" className="admin-text-button" disabled={locked} onClick={() => makeCover(p)}>대표로</button>}
                   <TextEdit label="설명" value={p.alt} disabled={locked} open={editing} onOpen={(open) => setAltOpen(open ? p.id : null)} onSave={(alt) => patchPhoto(p, { alt })} />
+                  {!editing && !p.hidden && (p.home === false
+                    ? <button type="button" className="admin-text-button" disabled={locked} onClick={() => patchPhoto(p, { home: true })}>첫 화면에 다시 넣기</button>
+                    : <button type="button" className="admin-text-button" disabled={locked} onClick={() => patchPhoto(p, { home: false })}>첫 화면에서 빼기</button>)}
                   {!editing && (p.hidden
                     ? <button type="button" className="admin-text-button" disabled={locked} onClick={() => patchPhoto(p, { hidden: false })}>다시 보이기</button>
                     : <button type="button" className="admin-text-button" disabled={locked} onClick={() => hide(p)}>숨기기</button>)}

@@ -10,6 +10,11 @@ import { getNewsEntries } from '@/lib/news';
 import { SHOW_RESEARCH_AREAS } from '@/lib/site';
 import styles from './home.module.css';
 
+/** Album photos that may appear on Home: each event's cover first, then its other photos; photos marked `home: false` are left out. */
+function homeAlbumPhotos(): string[] {
+  return getAlbums().flatMap((a) => [a.cover, ...a.photos.filter((p) => p.src !== a.cover.src)]).filter((p) => p.home).map((p) => p.src);
+}
+
 export default function HomePage() {
   const lab = getLab();
   const poem = getPoem();
@@ -28,7 +33,7 @@ export default function HomePage() {
         quote={poem.hero}
         poemTitle={poem.stanzas.length > 0 ? poem.title : ''}
         slides={getHomeSlides()}
-        albumPhotos={getAlbums().flatMap((a) => (a.cover ? [a.cover.src, ...a.photos.map((p) => p.src).filter((src) => src !== a.cover.src)] : a.photos.map((p) => p.src)))}
+        albumPhotos={homeAlbumPhotos()}
       />
 
       {news.length > 0 && (

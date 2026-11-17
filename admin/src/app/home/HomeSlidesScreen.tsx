@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { Section } from '@/components/Section';
+import { HOME_ALBUM_PICKS } from '@/lib/site';
 import { useDialog } from '@admin/components/Dialog';
 import { PublishFailure } from '@admin/components/PublishFailure';
 import { cell, PhotoGrid, PickPhotos, TextEdit, usePhotoUploads } from '@admin/components/PhotoGrid';
@@ -95,6 +96,7 @@ export function HomeSlidesScreen({ publish: { publishing, track, settled } }: { 
     <Section title="첫 화면 사진" aside={connected && (
       <PickPhotos accept={system.limits.photo_types.join(',')} onFiles={add} disabled={noteOpen !== null} />
     )}>
+      <p className="admin-muted">이 사진들 다음에 앨범 사진 중 {HOME_ALBUM_PICKS}장이 방문할 때마다 무작위로 이어집니다. 첫 화면에 어울리지 않는 사진은 Album에서 사진마다 "첫 화면에서 빼기"를 누르면 됩니다.</p>
       {!connected && <p className="admin-muted">원본 파일 저장소가 연결되어 있지 않습니다.</p>}
       {slides.length === 0 && uploads.length === 0 ? (
         connected && <p className="admin-muted">아직 등록된 사진이 없습니다.</p>
