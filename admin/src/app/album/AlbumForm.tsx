@@ -9,7 +9,7 @@ import { errorBody, fieldList } from '@admin/lib/errors';
 import type { Album } from '@admin/lib/types';
 
 /**
- * 행사 정보 폼: 날짜, 행사 이름 (api.md 6장). 날짜를 모르면 "월까지만"으로 연·월만 적습니다.
+ * 행사 정보 폼: 날짜, 행사 이름 (albums-api-contract.md). 날짜를 모르면 "월까지만"으로 연·월만 적습니다.
  * 쓰던 내용은 브라우저에 임시 보관하고, 저장하거나 취소하면 지웁니다. 고치기는 바꾼 칸만 보냅니다.
  *
  * - 새 행사(album 없음): "저장하고 사진 올리기" + "취소". 저장하면 화면이 그 행사를 펼쳐 사진 칸을 보여 줍니다.

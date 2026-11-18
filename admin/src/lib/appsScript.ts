@@ -1,5 +1,5 @@
 /**
- * Apps Script 전환 빌드의 연결 (계약: sai-lab-admin/docs/apps-script-transition-contract.md 2·3장).
+ * 관리 화면과 Apps Script 접수용 프로젝트(intake)의 연결 (계약: 관리 서버 저장소 docs/apps-script-transition-contract.md 2·3장).
  * 관리 서버 대신 google.script.run으로 접수용 프로젝트(intake)의 공개 함수를 부릅니다.
  * - 조회: snapshot()이 돌려주는 읽기 전용 사본에서 경로별로 꺼냅니다. 사본의 모양은 아래 Snapshot.
  * - 변경: submitMutation()으로 접수하고, 소유자 작업이 적용(applied)할 때까지 사본을 다시 읽으며 기다립니다.
@@ -64,7 +64,7 @@ const MESSAGES: Record<string, [ErrorCode, string]> = {
   VALIDATION_FAILED: ['VALIDATION_FAILED', '보낸 내용을 받지 못했습니다. 입력을 확인해 주세요.'],
   FILE_TOO_LARGE: ['FILE_TOO_LARGE', '파일이 20 MB를 넘습니다.'],
   UPLOAD_BUSY: ['BUSY', '처리를 기다리는 파일이 많습니다. 차례가 오면 이어서 올립니다.'],
-  OWNER_BUSY: ['BUSY', '관리 서버가 다른 저장을 정리하는 중입니다. 잠시 뒤 다시 저장해 주세요.'],
+  OWNER_BUSY: ['BUSY', '다른 저장을 정리하는 중입니다. 잠시 뒤 다시 저장해 주세요.'],
   CONFLICT: ['CONFLICT', '같은 접수 번호로 다른 내용이 이미 접수됐습니다. 새로고침한 뒤 다시 저장해 주세요.'],
   CONFIGURATION_REQUIRED: ['STORAGE_UNAVAILABLE', '관리 저장소 설정이 끝나지 않았습니다.'],
   INBOX_UNAVAILABLE: ['STORAGE_UNAVAILABLE', '이 계정의 접수 폴더를 쓸 수 없습니다.'],

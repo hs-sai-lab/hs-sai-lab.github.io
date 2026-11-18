@@ -13,7 +13,7 @@ import type { HomeSlide, System } from '@admin/lib/types';
 import type { usePublish } from '@admin/lib/usePublish';
 
 /**
- * Home › 첫 화면 사진 (api.md 7장). 사진 칸 목록에서 올리기, 메모, 숨기기, 순서.
+ * Home › 첫 화면 사진 (home-content-api-contract.md). 사진 칸 목록에서 올리기, 메모, 숨기기, 순서.
  * 메모는 관리 화면에서만 보이고 공개 사이트에는 나오지 않습니다.
  * 칸은 공개 사이트 첫 화면과 같은 16:9입니다. 메모를 고치는 동안에는 다른 칸의 동작과 "사진 올리기"를 막습니다.
  */

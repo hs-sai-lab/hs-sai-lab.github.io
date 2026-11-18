@@ -1,4 +1,4 @@
-/** api.md에 적힌 응답 모양 (쓰는 것만). */
+/** 관리 서버 계약 문서(docs/*-api-contract.md)에 적힌 응답 모양 (쓰는 것만). */
 export type Common = { id: string; hidden: boolean; sort_order: number; version: number; updated_at: string };
 
 export type Presenter = { person_id: string } | { name: string };
@@ -38,7 +38,7 @@ export type System = {
   password_rule: string;
 };
 
-/** 앨범 행사 (api.md 6장). 목록에서는 photos 없이 photo_count만 옵니다. */
+/** 앨범 행사 (albums-api-contract.md). 목록에서는 photos 없이 photo_count만 옵니다. */
 export type Album = Common & {
   slug: string;
   date: string; // YYYY-MM-DD 또는 YYYY-MM
@@ -53,7 +53,7 @@ export type Album = Common & {
 /** `home: false`: 공개 첫 화면의 무작위 앨범 사진에서 뺀 사진 (앨범에는 그대로 보임). */
 export type AlbumPhoto = Common & { file_id: string; preview_url: string | null; alt: string; home: boolean };
 
-/** 첫 화면 사진 (api.md 7장). note는 관리 화면에서만 보입니다. */
+/** 첫 화면 사진 (home-content-api-contract.md). note는 관리 화면에서만 보입니다. */
 export type HomeSlide = Common & { file_id: string; preview_url: string | null; note: string; publication: ContentPublication };
 export type ContentPublication = { state: 'publishing' | 'published' | 'failed'; job_id: string | null;
   message: string | null; commit_sha: string | null };
@@ -71,10 +71,10 @@ export type PoemStanza = { id: string; lines: string[]; hidden: boolean };
 export type PoemInfo = { id: 'main'; title: string; hero: number; credit: string;
   stanzas: PoemStanza[]; version: number; updated_at: string; publication: ContentPublication };
 
-/** GET /system의 마지막 반영·백업 (api.md 4장). */
+/** GET /system의 마지막 반영·백업 (files-and-publish.md). */
 export type LastRun = { id?: string; state: 'queued' | 'running' | 'done' | 'failed'; finished_at: string | null; message?: string | null };
 
-/* ---------- Research, News (설계: SAI-Lab-관리화면-Research-News-설계.md, API는 관리 서버 반영 전) ---------- */
+/* ---------- Research, News (docs/research-api-contract.md, docs/news-api-contract.md) ---------- */
 
 /** 논문 저자 한 명: 멤버면 person_id, 외부 저자면 이름. 순서가 저자 순서입니다. */
 export type Author = { person_id: string } | { name: string };

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { ApiError } from './api';
 
 /**
- * 오류를 팝업 본문으로 바꿉니다. 칸별 오류(fields)는 화면 칸 이름과 함께 목록으로 보여 줍니다 (api.md 1장).
+ * 오류를 팝업 본문으로 바꿉니다. 칸별 오류(fields)는 화면 칸 이름과 함께 목록으로 보여 줍니다 (apps-script-transition-contract.md).
  * labels: API 필드 이름 → 화면 칸 이름.
  */
 export function errorBody(err: unknown, labels: Record<string, string> = {}): ReactNode {

@@ -10,7 +10,7 @@ import type { Album, AlbumPhoto, System } from '@admin/lib/types';
 import styles from './album.module.css';
 
 /**
- * 펼친 행사의 사진 (api.md 6장, 규칙 문서 3-1): 사진 올리기, 대표로, 설명, 첫 화면에서 빼기, 숨기기, 순서.
+ * 펼친 행사의 사진 (albums-api-contract.md, guideline 4-1장): 사진 올리기, 대표로, 설명, 첫 화면에서 빼기, 숨기기, 순서.
  * 공개 첫 화면은 고른 사진 다음에 앨범 사진 몇 장을 무작위로 보여 줍니다. "첫 화면에서 빼기"(home: false)는 그 후보에서만 빼고 앨범에는 그대로 둡니다.
  * 대표 사진을 고르지 않았으면(cover_photo_id null) 숨기지 않은 첫 사진이 대표입니다.
  * 숨긴 사진은 대표로 고를 수 없고, 대표 사진을 숨기면 관리 서버가 대표를 첫 사진으로 되돌립니다.

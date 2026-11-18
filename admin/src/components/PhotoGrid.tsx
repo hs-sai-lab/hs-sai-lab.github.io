@@ -8,7 +8,7 @@ import { useDialog } from './Dialog';
 import styles from './PhotoGrid.module.css';
 
 /**
- * 사진이 주인 목록 (규칙 문서 1부 3장, 3-1): 사진 칸, 칸 아래 글과 동작 글자 버튼.
+ * 사진이 주인 목록 (guideline 4-1장): 사진 칸, 칸 아래 글과 동작 글자 버튼.
  * Album 행사의 사진(정사각형)과 Home 첫 화면 사진(16:9, `wide`)이 같이 씁니다.
  * 첫 화면 사진은 공개 사이트에서 16:9로 보이므로 관리 화면에서도 같은 비율로 보여 줍니다.
  *

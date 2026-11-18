@@ -1,12 +1,11 @@
 /**
- * Apps Script 전환 빌드 (npm run build:admin:apps-script).
+ * Apps Script 빌드 (npm run build:admin:apps-script).
  * - admin/gas-dist/Admin.html: 접수용 프로젝트에 Admin으로 넣는 껍데기(머리, CSS, 로더, data-build, data-parts).
  *   화면 코드는 들어 있지 않고 자리표시(ADMIN_CODE_MARK) 하나만 있습니다.
  * - admin/gas-dist/AdminCode1.html … AdminCodeN.html: 압축한 화면 코드(gzip+base64)를 PART_MAX_BYTES 이하로 나눈 조각.
  *   접수용 doGet(관리 서버 레포 apps-script/intake/Code.gs)이 껍데기의 data-parts 수만큼 이어 붙여 자리표시에 넣습니다.
  *   Apps Script 편집기는 큰 파일(약 370 KB, 한 줄 30만 자)을 저장하지 못해 나눴습니다. 조각은 템플릿으로 해석하지 않습니다.
  * - admin/gas-dist/mock.html: 가짜 google.script.run(mock.ts)을 넣은 로컬 확인용 한 파일. Apps Script에 넣지 않습니다.
- * 기존 빌드(npm run build:admin → admin/out/)와 관리 서버 연결은 바꾸지 않습니다.
  */
 import { build } from 'esbuild';
 import { bundleOptions } from './bundle-options.mjs';

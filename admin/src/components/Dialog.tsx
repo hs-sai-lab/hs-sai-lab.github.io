@@ -4,7 +4,7 @@ import { createContext, type ReactNode, useCallback, useContext, useRef, useStat
 import styles from './Dialog.module.css';
 
 /**
- * 팝업 하나로 확인 창과 오류 창을 모두 띄웁니다 (규칙 문서 1부 7장).
+ * 팝업 하나로 확인 창과 오류 창을 모두 띄웁니다 (guideline 4-1장).
  * - confirm: 주 버튼(동작 이름) + "취소". 누른 쪽을 true/false로 돌려줍니다.
  * - error: "닫기" (+ 다시 시도할 수 있으면 "다시 시도"). 다시 시도를 누르면 true.
  * 내용(body)은 없어도 됩니다 (제목만 있는 오류 창).

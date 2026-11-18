@@ -1,5 +1,5 @@
 /**
- * Apps Script 전환 빌드에서 next/image 대신 씁니다. HTML 파일 하나에 담기도록 관리 화면 그림을 data URI로 넣습니다.
+ * Apps Script 빌드에서 next/image 대신 씁니다. HTML 파일 하나에 담기도록 관리 화면 그림을 data URI로 넣습니다.
  */
 import type { ImgHTMLAttributes } from 'react';
 import hanshin from '../public/images/admin/hanshin-university.png';
