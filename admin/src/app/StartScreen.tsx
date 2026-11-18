@@ -4,16 +4,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { Section } from '@/components/Section';
 import { useDialog } from '@admin/components/Dialog';
 import list from '@admin/components/List.module.css';
-import { api, APPS_SCRIPT, type Publish, signedOut } from '@admin/lib/api';
+import { api, type Publish, signedOut } from '@admin/lib/api';
 import { errorBody } from '@admin/lib/errors';
 import { formatTime } from '@admin/lib/format';
 import type { LastRun, System } from '@admin/lib/types';
 import { usePublish } from '@admin/lib/usePublish';
-import { useSession } from '@admin/components/Session';
 
 /**
- * 반영·백업 화면 (규칙 문서 1부 6장의 "첫 화면"): 마지막 반영, 마지막 백업, 원본 파일 저장소를 목록 한 줄 형식으로.
- * "다시 반영"은 지금 저장된 내용 전체로 공개 사이트를 다시 만듭니다 (api.md 4장 POST /publish).
+ * 반영·백업 화면 (guideline 4-1장의 "첫 화면"): 마지막 반영, 마지막 백업, 원본 파일 저장소를 목록 한 줄 형식으로.
+ * "다시 반영"은 지금 저장된 내용 전체로 공개 사이트를 다시 만듭니다 (files-and-publish.md POST /publish).
  */
 const SITE = 'site'; // 반영 중 표시용 항목 id
 
@@ -23,7 +22,6 @@ const BACKUP: Record<LastRun['state'], string> = { queued: '백업 중', running
 export function StartScreen() {
   const dialog = useDialog();
   const { publishing, track, settled } = usePublish();
-  const { changePassword } = useSession();
   const [system, setSystem] = useState<System | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -90,7 +88,7 @@ export function StartScreen() {
             <p className={list.title}>마지막 원본 DB 백업</p>
             <p className={list.meta}>
               {backup?.finished_at ? <span className="num">{formatTime(backup.finished_at)}</span> : <span>{backup ? '진행 중' : '백업 기록 없음'}</span>}
-              <span>Drive에 30일 보관</span>
+              <span>30일 보관</span>
               {backup?.state === 'failed' && backup.message && <span>{backup.message}</span>}
             </p>
           </div>
@@ -107,18 +105,6 @@ export function StartScreen() {
       </ul>
     </Section>
 
-    {/* 휴대폰에서는 헤더에 "비밀번호 바꾸기"가 없어서 여기서 바꿉니다. PC에서도 같이 둡니다. Apps Script 전환 빌드에는 비밀번호가 없습니다. */}
-    {!APPS_SCRIPT && <Section title="계정">
-      <ul className={list.list}>
-        <li className={list.row}>
-          <div className={list.main}><p className={list.title}>공용 비밀번호</p></div>
-          <span className={list.status} />
-          <span className={list.actions}>
-            <button type="button" className="admin-text-button" onClick={changePassword}>바꾸기</button>
-          </span>
-        </li>
-      </ul>
-    </Section>}
     </>
   );
 }

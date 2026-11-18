@@ -10,7 +10,7 @@ import list from '@admin/components/List.module.css';
 import styles from './seminars.module.css';
 
 /**
- * 세미나 분야 Section (api.md 9장). 추가(제목 오른쪽, 목록 맨 위에 펼침), 이름 바꾸기(그 줄 자리에서), 숨기기, 순서(위로·아래로).
+ * 세미나 분야 Section (files-and-publish.md). 추가(제목 오른쪽, 목록 맨 위에 펼침), 이름 바꾸기(그 줄 자리에서), 숨기기, 순서(위로·아래로).
  * 숨긴 분야는 올리기 폼의 선택지에서 빠지고, 이미 그 분야인 세미나는 그대로 둡니다.
  * 추가·이름 바꾸기 칸이 열려 있는 동안에는 다른 줄의 동작과 "분야 추가"를 막습니다(세미나 목록과 같은 규칙).
  */

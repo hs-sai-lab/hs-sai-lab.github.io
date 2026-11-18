@@ -1,14 +1,20 @@
-/** Prepare a fresh public-site checkout for manual GitHub Pages media failover. Never pushes. */
+/**
+ * Manual failover only (not run by CI): if the private media repository (hs-sai-lab/SAI_Pages_Media) cannot be read
+ * at build time, copy its verified files into this checkout and switch content/media-delivery.json to "github" mode, so
+ * the next Pages build serves media from the site repository itself. Never pushes; review the result before committing.
+ */
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { verifyPrivateBackupCheckout } from './private-media-repo.mjs';
 
 const backup = process.argv[2];
 if (!backup) throw new Error('Usage: node scripts/prepare-media-fallback.mjs PRIVATE_REPO_CHECKOUT');
-verifyPrivateBackupCheckout(backup);
+const remote = execFileSync('git', ['remote', 'get-url', 'origin'], { cwd: backup, encoding: 'utf8' }).trim();
+if (!/^(?:https:\/\/github\.com\/|git@github\.com:)hs-sai-lab\/SAI_Pages_Media(?:\.git)?$/i.test(remote)) {
+  throw new Error('The backup checkout must come from the lab-owned private media repository (hs-sai-lab/SAI_Pages_Media).');
+}
 const root = process.cwd();
 const candidates = execFileSync('git', ['rev-list', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim().split('\n');
 const siteSha = candidates.find((sha) => fs.existsSync(path.join(backup, 'manifests', `${sha}.json`)));

@@ -1,6 +1,6 @@
 import { api, ApiError } from './api';
 
-/** 파일 (api.md 5장). 항목과 따로 먼저 올리고, ready가 된 파일의 id를 항목에 넣어 저장합니다. */
+/** 파일 (files-and-publish.md). 항목과 따로 먼저 올리고, ready가 된 파일의 id를 항목에 넣어 저장합니다. */
 export type FilePurpose = 'album' | 'home' | 'seminar_pdf' | 'seminar_cover' | 'person' | 'research_figure' | 'publication_pdf' | 'notice';
 export type FileInfo = {
   id: string;
@@ -105,7 +105,7 @@ export async function waitForFile(start: Pick<FileInfo, 'id' | 'status'> & Parti
 
 export const getFile = async (id: string) => (await api.get<FileInfo>(`/files/${id}`)).data;
 
-/** 올리는 중 글자. 전송률을 알 수 없으면(Apps Script 전환 빌드는 NaN을 넘김) 퍼센트를 붙이지 않습니다. */
+/** 올리는 중 글자. 전송률을 알 수 없으면(Apps Script 빌드는 NaN을 넘김) 퍼센트를 붙이지 않습니다. */
 export const uploadingLabel = (percent: number) => (Number.isNaN(percent) ? '올리는 중' : `올리는 중 ${percent}%`);
 
 /** 8.4 MB, 820 KB */

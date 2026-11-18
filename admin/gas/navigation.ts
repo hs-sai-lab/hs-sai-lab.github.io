@@ -1,5 +1,5 @@
 /**
- * Apps Script 전환 빌드에서 next/navigation 대신 씁니다.
+ * Apps Script 빌드에서 next/navigation 대신 씁니다.
  * HTML 서비스는 /exec 주소 하나라서 관리 화면 주소를 해시(#/members/)로 둡니다.
  */
 import { useSyncExternalStore } from 'react';

@@ -1,5 +1,5 @@
 /**
- * 폼 공통: 쓰던 내용 임시 보관과 "바꾼 칸만" 보내기 (규칙 문서 3-3 원칙 5, api.md 1장 PATCH).
+ * 폼 공통: 쓰던 내용 임시 보관과 "바꾼 칸만" 보내기 (guideline 4-1장, apps-script-transition-contract.md PATCH).
  */
 import { useRef } from 'react';
 

@@ -30,10 +30,8 @@ jobs:
         run: npm run check
         env:
           SAI_SKIP_PRIVATE_MEDIA_CHECK: '1'
-      - name: Build management screen (type check)
-        run: npm run build:admin
-        env:
-          NEXT_TELEMETRY_DISABLED: 1
+      - name: Type-check management screen
+        run: npm run check:admin-types
       - name: Build management screen for Apps Script
         run: npm run build:admin:apps-script
       - name: Check management screen routes and forms

@@ -1,5 +1,5 @@
 /*
- * 사진 칸 목록: 정사각형 사진(첫 화면 사진은 16:9, .wide), 아래에 글과 동작 글자 버튼 (규칙 문서 1부 3장).
+ * 사진 칸 목록: 정사각형 사진(첫 화면 사진은 16:9, .wide), 아래에 글과 동작 글자 버튼 (guideline 4-1장).
  * 상태(숨김, 대표)는 보통 글자로 씁니다. 사진을 흐리게 하는 등 색으로 꾸미지 않습니다.
  */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 28px 20px; padding: 4px; margin: -4px; border-radius: 6px; }

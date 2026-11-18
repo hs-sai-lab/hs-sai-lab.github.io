@@ -16,7 +16,7 @@ import styles from './album.module.css';
 import { canDelete, useDeletePost } from '@admin/lib/deletePost';
 
 /**
- * Album 한 화면 (규칙 문서 3-1, api.md 6장).
+ * Album 한 화면 (guideline 4-1장, albums-api-contract.md).
  * - 행사 목록(대표 사진 칸, 날짜 최신순). 행사 이름이나 "고치기"를 누르면 그 자리에서 행사가 펼쳐집니다:
  *   머리 줄(대표 사진, 이름, 상태, "접기") → 행사 정보(날짜·이름, "저장") → 사진(올리기, 대표, 설명, 숨기기, 순서).
  * - "행사 추가": 목록 맨 위에 행사 정보만 열리고, "저장하고 사진 올리기"를 누르면 같은 자리에서 그 행사가 펼쳐집니다.

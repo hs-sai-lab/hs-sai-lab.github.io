@@ -1,5 +1,5 @@
 /**
- * Apps Script 전환 빌드의 시작점. 기존 관리 화면(app/*)을 그대로 쓰고, 틀(app/layout.tsx)과 주소만 바꿉니다.
+ * 관리 화면(Apps Script 빌드)의 시작점. 화면은 admin/src/app/*의 page.tsx를 쓰고, 공통 틀(헤더, 팝업, 로그인 상태)은 여기서 둡니다.
  * - 주소는 해시(#/members/). 화면 안의 "/members/" 같은 링크는 눌렀을 때 해시로 바꿉니다.
  * - Pretendard 글꼴은 HTML 틀(build.mjs)이 CDN에서 불러옵니다. 나머지 글꼴·CSS·그림은 이 파일 하나에 들어갑니다.
  */

@@ -13,7 +13,7 @@ import list from '@admin/components/List.module.css';
 import { canDelete, useDeletePost } from '@admin/lib/deletePost';
 
 /**
- * Seminars 한 화면 (세미나 업로드 설계 5장, 규칙 문서 3-2).
+ * Seminars 한 화면 (guideline 4-1장).
  * 세미나: 목록(날짜 최신순), 목록 위에서 올리기, 줄 자리에서 고치기, 숨기기, 첫 화면에 보이기.
  * 세미나 분야: 추가, 이름 바꾸기, 숨기기, 순서.
  * 폼이 열려 있는 동안(올리기·고치기)에는 목록의 다른 동작과 "세미나 올리기"를 막습니다. 폼 하나만 다루게 하려는 것입니다.

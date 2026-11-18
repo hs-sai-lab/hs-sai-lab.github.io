@@ -23,7 +23,7 @@ const ready = (info: FileInfo, name: string): FileValue =>
     preview_url: info.preview_url, content_url: info.content_url, warnings: info.warnings ?? [] });
 
 /**
- * 파일 하나를 고르면 바로 올리고, 칸 안에 상태를 보통 글자로 보여 줍니다 (세미나 업로드 설계 5장).
+ * 파일 하나를 고르면 바로 올리고, 칸 안에 상태를 보통 글자로 보여 줍니다.
  * 고르기 전 → 올리는 중 42% → 처리 중 → 준비됨(이름, 공개용 크기, 바꾸기, 미리보기).
  * 실패는 오류 팝업 뒤 바꾸기 전 파일(없으면 고르기 전)로 돌아갑니다.
  * 올리는 중에는 창을 닫거나 새로고침하면 브라우저가 확인을 묻습니다. 처리 중에는 묻지 않습니다(돌아와서 이어서 기다림).
