@@ -1,0 +1,30 @@
+# Manual only. Takes the public site offline by deploying an empty site: every address returns 404.
+# Before running, disable "Build and deploy SAI Lab site" so content updates do not publish the full site again.
+# To bring the site back: enable "Build and deploy SAI Lab site" and run it (workflow_dispatch) on main.
+name: Take site offline
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    steps:
+      - name: Build an empty site
+        run: |
+          mkdir -p empty
+          printf '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>404</title>\n' > empty/404.html
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: empty
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v5
